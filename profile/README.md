@@ -1,4 +1,7 @@
-# SFI Visual Intelligence 👁️
+
+<p align="center">
+ <img src="https://github.com/c-salomonsen/.github/blob/b1223c7c6e8dc876eeeb52d5f6cd4f4fb4d8da80/profile/assets/VI-logo-960px.png" width=400>
+</p>
 
 [Visual Intelligence](https://www.visual-intelligence.no/) aims to be the lead provider of novel deep learning-based solutions for cutting-edge complex image analysis. We answer innovation needs shared across a consortium of corporate and public user partners and beyond. Our research spans core AI methodology and domain-driven visual intelligence in medicine and health, marine science, energy, and earth observation.
 
