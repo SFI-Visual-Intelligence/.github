@@ -19,6 +19,6 @@ jobs:
 
       - name: Run the README update script
         env:
-          GITHUB_TOKEN: ${{ secrets.ORG_SYNC_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.README_ADJUST_TOKEN }}
           CSV_FILENAME: VI_publications_for_Github.csv
         run: python update_readmes.py
