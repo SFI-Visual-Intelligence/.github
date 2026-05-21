@@ -1,0 +1,116 @@
+name: Check Required Files in Organization Repos
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Daily at midnight UTC
+  workflow_dispatch:      # Allow manual trigger
+
+jobs:
+  check-repos:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: read
+
+    steps:
+      - name: Check required files and open issues
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.ORG_CHECK_TOKEN }}
+          script: |
+            const org = context.repo.owner;
+            const requiredFiles = ['LICENSE', 'CITATION.cff', 'README.md', '.gitignore'];
+
+            // Fetch all repos in the organization (handles pagination)
+            const repos = await github.paginate(github.rest.repos.listForOrg, {
+              org,
+              type: 'all',
+              per_page: 100,
+            });
+
+            for (const repo of repos) {
+              if (repo.archived || repo.disabled) {
+                console.log(`Skipping archived/disabled repo: ${repo.name}`);
+                continue;
+              }
+
+              const missingFiles = [];
+
+              for (const file of requiredFiles) {
+                try {
+                  await github.rest.repos.getContent({
+                    owner: org,
+                    repo: repo.name,
+                    path: file,
+                  });
+                } catch (err) {
+                  if (err.status === 404) {
+                    missingFiles.push(file);
+                  } else {
+                    console.error(`Error checking ${file} in ${repo.name}: ${err.message}`);
+                  }
+                }
+              }
+
+              if (missingFiles.length === 0) {
+                console.log(`✓ ${repo.name}: all required files present`);
+                continue;
+              }
+
+              console.log(`✗ ${repo.name}: missing ${missingFiles.join(', ')}`);
+
+              // Fetch existing open issues to avoid duplicates
+              const existingIssues = await github.paginate(github.rest.issues.listForRepo, {
+                owner: org,
+                repo: repo.name,
+                state: 'open',
+                per_page: 100,
+              });
+
+              for (const missingFile of missingFiles) {
+                const issueTitle = `Add missing required file: ${missingFile}`;
+                const alreadyExists = existingIssues.some(
+                  issue => issue.title === issueTitle
+                );
+
+                if (alreadyExists) {
+                  console.log(`  Issue already open for ${missingFile} in ${repo.name}, skipping`);
+                  continue;
+                }
+
+                const body = [
+                  `## Missing required file: \`${missingFile}\``,
+                  '',
+                  `This repository is missing the \`${missingFile}\` file, which is required for all repositories in the **${org}** organization.`,
+                  '',
+                  '### Why is this file needed?',
+                  ...(missingFile === 'LICENSE' ? [
+                    '- A **LICENSE** file clarifies the legal terms under which others may use, modify, and distribute the code.',
+                  ] : []),
+                  ...(missingFile === 'CITATION.cff' ? [
+                    '- A **CITATION.cff** file provides structured citation metadata so others can correctly cite this software.',
+                  ] : []),
+                  ...(missingFile === 'README.md' ? [
+                    '- A **README.md** file provides essential documentation: what the project does, how to install and use it, and how to contribute.',
+                  ] : []),
+                  ...(missingFile === '.gitignore' ? [
+                    '- A **.gitignore** file prevents unwanted files (build artifacts, secrets, editor configs, etc.) from being accidentally committed to the repository.',
+                  ] : []),
+                  '',
+                  '### Action required',
+                  `Please add a \`${missingFile}\` file to the root of this repository.`,
+                  '',
+                  '*This issue was automatically created by the organization repository compliance workflow.*',
+                ].join('\n');
+
+                await github.rest.issues.create({
+                  owner: org,
+                  repo: repo.name,
+                  title: issueTitle,
+                  body,
+                  labels: ['compliance', 'documentation'],
+                });
+
+                console.log(`  Created issue for ${missingFile} in ${repo.name}`);
+              }
+            }
