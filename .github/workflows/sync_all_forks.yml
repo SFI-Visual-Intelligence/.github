@@ -1,0 +1,48 @@
+name: Sync All External Organization Forks
+ 
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs daily at midnight UTC
+  workflow_dispatch: # Allows you to run this manually anytime
+ 
+jobs:
+  sync-forks:
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: Authenticate GitHub CLI
+        env:
+          GH_TOKEN: ${{ secrets.ORG_SYNC_TOKEN }}
+        run: |
+          echo "Authenticating GitHub CLI..."
+ 
+      - name: Find and Sync External Forks
+        env:
+          GH_TOKEN: ${{ secrets.ORG_SYNC_TOKEN }}
+          ORG_NAME: ${{ github.repository_owner }} # Dynamically gets your org name
+        run: |
+          echo "Fetching all repositories for organization: $ORG_NAME..."
+          # 1. Fetch all repos in the org, filtering for forks, and output their full names (org/repo)
+          # We use pagination (limit 1000) to ensure we grab all of them.
+          FORKS=$(gh api --paginate "/orgs/$ORG_NAME/repos" --jq '.[] | select(.fork == true) | .full_name')
+ 
+          if [ -z "$FORKS" ]; then
+            echo "No forks found inside the organization."
+            exit 0
+          fi
+ 
+          echo "Found the following forks to sync:"
+          echo "$FORKS"
+          echo "----------------------------------------"
+ 
+          # 2. Loop through each fork and sync it with its upstream source
+          for REPO in $FORKS; do
+            echo "🔄 Syncing $REPO with its upstream repository..."
+            # Using the built-in 'gh repo sync' command, which handles the upstream fetch & merge automatically
+            if gh repo sync "$REPO" --force; then
+              echo "✅ Successfully synced $REPO"
+            else
+              echo "❌ Failed to sync $REPO. This might happen if there are unresolvable merge conflicts or permission constraints."
+            fi
+            echo "----------------------------------------"
+          done
