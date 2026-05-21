@@ -21,6 +21,19 @@
 | [⚡ Energy](#energy) | Power line inspection, microfossil analysis, and uncertainty-aware energy applications. |
 | [🛰️ Earth observation](#earth-observation) | SAR, multimodal remote sensing, land cover mapping, sea ice, and change detection. |
 
+
+## Collaborative Work
+
+### IceNet
+
+[Visual Intelligence](https://www.visual-intelligence.no/) is in ongoing collaboration with [The Alan Turing Institude](https://www.turing.ac.uk/), the [British Antarctic Survey](https://www.bas.ac.uk/), and the [Univerity of Cambridge](https://www.cam.ac.uk/) on AI powered sea ice forcasting. 
+Detailed information on the project as well as links to corresponding GitHub repositories can be found on the [IceNet website](https://icenet.ai/).
+
+### Get in touch
+If you have questions or remarks to an of the Visual Intelligence repositories, or if you are interested in a collaboration, please open a [Discussion](https://github.com/orgs/SFI-Visual-Intelligence/discussions).
+
+
+
 ## Featured repositories 🧰
 
 | Repository | Formal category |
