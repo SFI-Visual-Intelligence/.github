@@ -25,7 +25,7 @@
 
 ### IceNet 🧊
 
-[Visual Intelligence](https://www.visual-intelligence.no/) is in ongoing collaboration with [The Alan Turing Institute](https://www.turing.ac.uk/), the [British Antarctic Survey](https://www.bas.ac.uk/), and the [Univerity of Cambridge](https://www.cam.ac.uk/) on AI powered sea ice forcasting. 
+[Visual Intelligence](https://www.visual-intelligence.no/) is in ongoing collaboration with [The Alan Turing Institute](https://www.turing.ac.uk/), the [British Antarctic Survey](https://www.bas.ac.uk/), and the [University of Cambridge](https://www.cam.ac.uk/) on AI powered sea ice forcasting. 
 Detailed information on the project as well as links to corresponding GitHub repositories can be found on the [IceNet website](https://icenet.ai/).
 
 ### Get in touch 🗣️
