@@ -49,7 +49,7 @@ Papers can appear in both views to make the index useful from either direction.
 ## Innovation areas 🚀
 
 <a id="medicine-and-health"></a>
-<details open>
+<details>
 <summary><strong>🩺 Medicine and health</strong> (37 publications)</summary>
 
 | Year | Topic | Research challenge | Publication | Code / resource |
@@ -140,7 +140,7 @@ Papers can appear in both views to make the index useful from either direction.
 ## Research challenges 🧪
 
 <a id="limited-training-data"></a>
-<details open>
+<details>
 <summary><strong>📉 Limited training data</strong> (41 publications)</summary>
 
 | Year | Topic | Innovation area | Publication | Code / resource |
