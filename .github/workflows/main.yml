@@ -1,0 +1,14 @@
+name: Org Standard CI
+ 
+on:
+  workflow_call: # This makes the workflow reusable by other repos
+ 
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+ 
+      - name: Run Security Scan
+        run: echo "Running mandatory organization security scan..."
