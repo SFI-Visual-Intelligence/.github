@@ -36,9 +36,10 @@ If you have questions or remarks to any of the Visual Intelligence repositories,
 
 | Repository | Formal category |
 | --- | --- |
-| [MAP IT to Visualize Representations](https://github.com/SFI-Visual-Intelligence/MAP-IT-to-Visualize-Representations) | 📉 Limited training data |
+| [Reconsidering Explicit Longitudinal Mammography Alignment for Enhanced Breast Cancer Risk Prediction](https://github.com/SFI-Visual-Intelligence/Longitudinal_Mammogram_Alignment.git) | 🧩 Context and dependencies / 🩺 Medicine and health |
 | [RELAX: Representation Learning Explainability](https://github.com/SFI-Visual-Intelligence/RELAX) | 🔍 Explainability and reliability |
-| [Joint despeckling and thermal noise compensation](https://github.com/SFI-Visual-Intelligence/joint-despeckling-and-thermal-noise-compensation) | 🧩 Context and dependencies / 🛰️ Earth observation |
+| [The Fossil Frontier: An answer to the 3-billion fossil question](https://github.com/SFI-Visual-Intelligence/scampi-benchmark) | 📉 Limited training data / ⚡ Energy |
+
 
 ## Publications index 📚
 
