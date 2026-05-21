@@ -53,7 +53,7 @@ Papers can appear in both views to make the index useful from either direction.
 
 | Year | Topic | Research challenge | Publication | Code / resource |
 | --- | --- | --- | --- | --- |
-| 2026 | Dynamic PET | Limited training data | CA robust and versatile deep learning model for prediction of the arterial input function in dynamic small animal [18F] FDG PET imaging ([paper]([https://proceedings.mlr.press/v307/utseth26a.html](https://link.springer.com/article/10.1186/s13550-026-01398-9))) |   |
+| 2026 | Dynamic PET | Limited training data | A robust and versatile deep learning model for prediction of the arterial input function in dynamic small animal [18F] FDG PET imaging ([paper]([https://proceedings.mlr.press/v307/utseth26a.html](https://link.springer.com/article/10.1186/s13550-026-01398-9))) |   |
 | 2026 | General | Limited training data | Comparing Foundation Models for Medical Images: A Study on Limited Data and Generalization ([paper](https://proceedings.mlr.press/v307/utseth26a.html)) |   |
 | 2026 | Cardiac | Context and dependencies | Spatio-Temporal Landmark Detection via Selective Fine-Tuning of Echocardiography Foundation Models ([paper](https://openreview.net/forum?id=91igqpzV9M&noteId=91igqpzV9M)) | [Code](https://github.com/SFI-Visual-Intelligence/EchoVLMLandmarks) |
 | 2025 | Digital Pathology | Explainability and reliability | A lightweight and extensible cell segmentation and classification model for H&E-stained cancer whole slide images ([paper](https://doi.org/10.1016/j.compbiomed.2025.111326)) |   |
