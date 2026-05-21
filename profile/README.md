@@ -30,7 +30,7 @@
 Detailed information on the project as well as links to corresponding GitHub repositories can be found on the [IceNet website](https://icenet.ai/).
 
 ### Get in touch
-If you have questions or remarks to an of the Visual Intelligence repositories, or if you are interested in a collaboration, please open a [Discussion](https://github.com/orgs/SFI-Visual-Intelligence/discussions).
+If you have questions or remarks to any of the Visual Intelligence repositories, or if you are interested in a collaboration, please open a [Discussion](https://github.com/orgs/SFI-Visual-Intelligence/discussions).
 
 
 
