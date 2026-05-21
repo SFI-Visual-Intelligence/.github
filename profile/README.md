@@ -41,14 +41,14 @@ Papers can appear in both views to make the index useful from either direction.
 
 | Year | Topic | Research challenge | Publication | Code / resource |
 | --- | --- | --- | --- | --- |
-| 2026 | General | Limited training data | Comparing Foundation Models for Medical Images: A Study on Limited Data and Generalization | Not listed |
-| 2026 | Cardiac | Context and dependencies | Spatio-Temporal Landmark Detection via Selective Fine-Tuning of Echocardiography Foundation Models | [Code](https://github.com/preetrajb/EchoVLMLandmarks) |
-| 2025 | Digital Pathology | Explainability and reliability | A lightweight and extensible cell segmentation and classification model for H&E-stained cancer whole slide images | Not listed |
-| 2025 | Mammography | Context and dependencies | Assessing the Efficacy of Multi-task Learning in Mammographic Density Classification: A Study on Class Imbalance and Model Performance | Not listed |
-| 2025 | Digital Pathology | Limited training data | Fast TILs - A pipeline for efficient TILs estimation in non-small cell lung cancer | [Code](https://github.com/uit-hdl/hovernet-pipeline) |
-| 2025 | Mammography | Confidence and uncertainty | Modelling Uncertainty in Graph Convolutional Networks for Edge Detection in Mammograms | Not listed |
-| 2025 | Cardiac | Context and dependencies | Motion-Compensated Interpolation in Echocardiography: A Lie Advection-Based Approach | Not listed |
-| 2025 | Mammography | Context and dependencies | Reconsidering Explicit Longitudinal Mammography Alignment for Enhanced Breast Cancer Risk Prediction | [Code](https://github.com/sot176/Longitudinal_Mammogram_Alignment.git) |
+| 2026 | General | Limited training data | Comparing Foundation Models for Medical Images: A Study on Limited Data and Generalization ([paper](https://proceedings.mlr.press/v307/utseth26a.html)) | Not listed |
+| 2026 | Cardiac | Context and dependencies | Spatio-Temporal Landmark Detection via Selective Fine-Tuning of Echocardiography Foundation Models ([paper](https://openreview.net/forum?id=91igqpzV9M&noteId=91igqpzV9M)) | [Code](https://github.com/preetrajb/EchoVLMLandmarks) |
+| 2025 | Digital Pathology | Explainability and reliability | A lightweight and extensible cell segmentation and classification model for H&E-stained cancer whole slide images ([paper](https://doi.org/10.1016/j.compbiomed.2025.111326)) | Not listed |
+| 2025 | Mammography | Context and dependencies | Assessing the Efficacy of Multi-task Learning in Mammographic Density Classification: A Study on Class Imbalance and Model Performance ([paper](https://doi.org/10.1007/978-3-031-95918-9_20)) | Not listed |
+| 2025 | Digital Pathology | Limited training data | Fast TILs - A pipeline for efficient TILs estimation in non-small cell lung cancer ([paper](https://doi.org/10.1016/j.jpi.2025.100437)) | [Code](https://github.com/uit-hdl/hovernet-pipeline) |
+| 2025 | Mammography | Confidence and uncertainty | Modelling Uncertainty in Graph Convolutional Networks for Edge Detection in Mammograms ([paper](https://doi.org/10.1007/978-3-031-98691-8_19)) | Not listed |
+| 2025 | Cardiac | Context and dependencies | Motion-Compensated Interpolation in Echocardiography: A Lie Advection-Based Approach ([paper](https://doi.org/10.1109/TBME.2024.3440838)) | Not listed |
+| 2025 | Mammography | Context and dependencies | Reconsidering Explicit Longitudinal Mammography Alignment for Enhanced Breast Cancer Risk Prediction ([paper](https://doi.org/10.1007/978-3-032-04937-7_47)) | [Code](https://github.com/sot176/Longitudinal_Mammogram_Alignment.git) |
 | 2025 | General | Explainability and reliability | Tied Prototype Model for Few-Shot Medical Image Segmentation | [Code](https://github.com/hjk92g/TPM-FSS) |
 | 2025 | Mammography | Context and dependencies | VMRA-MaR: An Asymmetry-Aware Temporal Framework for Longitudinal Breast Cancer Risk Prediction | [Code](https://github.com/Mortal-Suen/VMRA-MaR.git) |
 | 2025 | Cardiac | Limited training data | WiseLVAM: A Novel Framework For Left Ventricle Automatic Measurements | Not available |
