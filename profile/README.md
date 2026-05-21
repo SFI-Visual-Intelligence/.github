@@ -53,6 +53,7 @@ Papers can appear in both views to make the index useful from either direction.
 
 | Year | Topic | Research challenge | Publication | Code / resource |
 | --- | --- | --- | --- | --- |
+| 2026 | Dynamic PET | Limited training data | CA robust and versatile deep learning model for prediction of the arterial input function in dynamic small animal [18F] FDG PET imaging ([paper]([https://proceedings.mlr.press/v307/utseth26a.html](https://link.springer.com/article/10.1186/s13550-026-01398-9))) |   |
 | 2026 | General | Limited training data | Comparing Foundation Models for Medical Images: A Study on Limited Data and Generalization ([paper](https://proceedings.mlr.press/v307/utseth26a.html)) |   |
 | 2026 | Cardiac | Context and dependencies | Spatio-Temporal Landmark Detection via Selective Fine-Tuning of Echocardiography Foundation Models ([paper](https://openreview.net/forum?id=91igqpzV9M&noteId=91igqpzV9M)) | [Code](https://github.com/SFI-Visual-Intelligence/EchoVLMLandmarks) |
 | 2025 | Digital Pathology | Explainability and reliability | A lightweight and extensible cell segmentation and classification model for H&E-stained cancer whole slide images ([paper](https://doi.org/10.1016/j.compbiomed.2025.111326)) |   |
@@ -145,6 +146,7 @@ Papers can appear in both views to make the index useful from either direction.
 | Year | Topic | Innovation area | Publication | Code / resource |
 | --- | --- | --- | --- | --- |
 | 2026 | Foundation models | Medicine and health | Comparing Foundation Models for Medical Images: A Study on Limited Data and Generalization ([paper](https://proceedings.mlr.press/v307/utseth26a.html)) |   |
+| 2026 | Dynamic PET | Limited training data | CA robust and versatile deep learning model for prediction of the arterial input function in dynamic small animal [18F] FDG PET imaging ([paper]([https://proceedings.mlr.press/v307/utseth26a.html](https://link.springer.com/article/10.1186/s13550-026-01398-9))) |   |
 | 2025 | Unsupervised learning |   | AdaptCMVC: Robust Adaption to Incremental Views in Continual Multi-view Clustering ([paper](https://doi.org/10.1109/CVPR52734.2025.00962)) | [Code](https://github.com/SFI-Visual-Intelligence/AdaptCMVC) |
 | 2025 | Domain transfer | Medicine and health | Fast TILs - A pipeline for efficient TILs estimation in non-small cell lung cancer ([paper](https://doi.org/10.1016/j.jpi.2025.100437)) | [Code](https://github.com/SFI-Visual-Intelligence/hovernet-pipeline) |
 | 2025 | Foundation models | Marine science | Leveraging Foundation Model Adapters to Enable Robust and Semantic Underwater Exploration ([paper](https://ceur-ws.org/Vol-3975/)) |   |
