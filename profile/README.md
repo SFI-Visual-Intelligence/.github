@@ -1,5 +1,5 @@
 <p align="center">
- <img src="https://github.com/c-salomonsen/.github/blob/b1223c7c6e8dc876eeeb52d5f6cd4f4fb4d8da80/profile/assets/VI-logo-960px.png" width=400>
+ <img src="https://github.com/SFI-Visual-Intelligence/.github/blob/2c196699bfb72dbf669f5a8cd45351fff963be1e/profile/assets/VI-logo-960px.png" width=400>
 </p>
 
 [Visual Intelligence](https://www.visual-intelligence.no/) aims to be the lead provider of novel deep learning-based solutions for cutting-edge complex image analysis. We answer innovation needs shared across a consortium of corporate and public user partners and beyond. Our research spans core AI methodology and domain-driven visual intelligence in medicine and health, marine science, energy, and earth observation.
