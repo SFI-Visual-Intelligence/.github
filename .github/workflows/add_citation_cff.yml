@@ -1,0 +1,322 @@
+name: Add CITATION.cff to All Repos
+
+on:
+  schedule:
+    - cron: '0 3 * * 1'  # Runs every Monday at 3am UTC
+  workflow_dispatch:     # Allows manual trigger anytime
+
+jobs:
+  add-citations:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: pip install requests
+
+      - name: Create CITATION.cff for repos that are missing one
+        env:
+          GH_TOKEN: ${{ secrets.ORG_SYNC_TOKEN }}
+          ORG_NAME: ${{ github.repository_owner }}
+        run: |
+          python3 << 'PYTHON_EOF'
+          import os, re, base64, time
+          import requests
+          import xml.etree.ElementTree as ET
+
+          GH_TOKEN = os.environ['GH_TOKEN']
+          ORG_NAME = os.environ['ORG_NAME']
+          HEADERS = {
+              'Authorization': f'Bearer {GH_TOKEN}',
+              'Accept': 'application/vnd.github.v3+json',
+              'X-GitHub-Api-Version': '2022-11-28',
+          }
+
+          # ──────────────────────────────────────────────
+          # GitHub API helpers
+          # ──────────────────────────────────────────────
+
+          def get_all_repos():
+              """Fetch every repo owned by ORG_NAME (org or user account)."""
+              repos, page = [], 1
+              while True:
+                  resp = requests.get(
+                      f'https://api.github.com/orgs/{ORG_NAME}/repos',
+                      headers=HEADERS,
+                      params={'per_page': 100, 'page': page, 'type': 'all'},
+                  )
+                  # Fall back to user repos if this is a personal account
+                  if resp.status_code == 404:
+                      resp = requests.get(
+                          'https://api.github.com/user/repos',
+                          headers=HEADERS,
+                          params={'per_page': 100, 'page': page, 'affiliation': 'owner'},
+                      )
+                  data = resp.json() if resp.ok else []
+                  if not data:
+                      break
+                  repos.extend(data)
+                  if len(data) < 100:
+                      break
+                  page += 1
+              return repos
+
+          def citation_exists(full_name):
+              resp = requests.get(
+                  f'https://api.github.com/repos/{full_name}/contents/CITATION.cff',
+                  headers=HEADERS,
+              )
+              return resp.status_code == 200
+
+          def get_readme(full_name):
+              resp = requests.get(
+                  f'https://api.github.com/repos/{full_name}/readme',
+                  headers=HEADERS,
+              )
+              if not resp.ok:
+                  return ''
+              return base64.b64decode(resp.json()['content']).decode('utf-8', errors='replace')
+
+          # ──────────────────────────────────────────────
+          # README paper-link extraction
+          # ──────────────────────────────────────────────
+
+          def find_paper_links(text):
+              """Return (arxiv_ids, dois) found in README text."""
+              arxiv_ids = re.findall(
+                  r'arxiv\.org/(?:abs|pdf)/([0-9]{4}\.[0-9]+(?:v\d+)?)',
+                  text, re.I,
+              )
+              # Match bare DOI strings and doi.org URLs
+              dois = re.findall(
+                  r'(?:doi\.org/|doi:\s*)(10\.[^\s\)\]\"\'<>\n]+)',
+                  text, re.I,
+              )
+              # Strip trailing punctuation that may have been captured
+              dois = [d.rstrip('.,;)') for d in dois]
+              return arxiv_ids, dois
+
+          # ──────────────────────────────────────────────
+          # Metadata fetchers
+          # ──────────────────────────────────────────────
+
+          def fetch_arxiv(arxiv_id):
+              clean = re.sub(r'v\d+$', '', arxiv_id)
+              try:
+                  resp = requests.get(
+                      f'https://export.arxiv.org/api/query?id_list={clean}',
+                      timeout=15,
+                  )
+                  root = ET.fromstring(resp.text)
+                  ns = {
+                      'a':  'http://www.w3.org/2005/Atom',
+                      'ax': 'http://arxiv.org/schemas/atom',
+                  }
+                  entry = root.find('a:entry', ns)
+                  if entry is None:
+                      return None
+
+                  title_el     = entry.find('a:title', ns)
+                  published_el = entry.find('a:published', ns)
+                  doi_el       = entry.find('ax:doi', ns)
+                  journal_el   = entry.find('ax:journal_ref', ns)
+
+                  authors = []
+                  for auth in entry.findall('a:author', ns):
+                      name_el = auth.find('a:name', ns)
+                      if name_el is not None:
+                          parts = name_el.text.strip().rsplit(' ', 1)
+                          if len(parts) == 2:
+                              authors.append({'given-names': parts[0], 'family-names': parts[1]})
+                          else:
+                              authors.append({'name': name_el.text.strip()})
+
+                  return {
+                      'title':   title_el.text.strip().replace('\n', ' ') if title_el is not None else None,
+                      'authors': authors,
+                      'year':    int(published_el.text[:4]) if published_el is not None else None,
+                      'doi':     doi_el.text.strip() if doi_el is not None else None,
+                      'url':     f'https://arxiv.org/abs/{arxiv_id}',
+                      'journal': journal_el.text if journal_el is not None else None,
+                  }
+              except Exception as e:
+                  print(f'    [warn] arXiv fetch failed: {e}')
+                  return None
+
+          def fetch_doi(doi):
+              try:
+                  resp = requests.get(
+                      f'https://api.crossref.org/works/{doi}',
+                      headers={
+                          'Accept': 'application/json',
+                          'User-Agent': 'CitationCFFBot/1.0 (automated; github-actions)',
+                      },
+                      timeout=15,
+                  )
+                  if not resp.ok:
+                      return None
+                  msg = resp.json().get('message', {})
+
+                  authors = []
+                  for a in msg.get('author', []):
+                      auth = {}
+                      if 'given'  in a: auth['given-names']  = a['given']
+                      if 'family' in a: auth['family-names'] = a['family']
+                      if auth:
+                          authors.append(auth)
+
+                  pub = msg.get('published-print', msg.get('published-online', {}))
+                  dp  = pub.get('date-parts', [[]])
+                  year = dp[0][0] if dp and dp[0] else None
+
+                  titles    = msg.get('title', [])
+                  container = (msg.get('container-title') or [None])[0]
+                  return {
+                      'title':   titles[0] if titles else None,
+                      'authors': authors,
+                      'year':    year,
+                      'doi':     doi,
+                      'url':     f'https://doi.org/{doi}',
+                      'journal': container,
+                  }
+              except Exception as e:
+                  print(f'    [warn] CrossRef fetch failed: {e}')
+                  return None
+
+          # ──────────────────────────────────────────────
+          # CITATION.cff builder
+          # ──────────────────────────────────────────────
+
+          def q(s):
+              """Wrap a value in double-quotes for YAML, escaping interior quotes."""
+              if s is None:
+                  return '""'
+              return '"' + str(s).replace('\\', '\\\\').replace('"', '\\"').replace('\n', ' ') + '"'
+
+          def build_cff(repo, paper=None):
+              name     = repo['name']
+              repo_url = repo['html_url']
+              desc     = (repo.get('description') or '').strip()
+              branch   = repo.get('default_branch', 'main')
+
+              lines = [
+                  'cff-version: 1.2.0',
+                  f'message: "If you use this software, please cite it as below."',
+                  'type: software',
+                  f'title: {q(name)}',
+                  f'repository-code: {q(repo_url)}',
+              ]
+              if desc:
+                  lines.append(f'abstract: {q(desc)}')
+
+              lines += [
+                  'authors:',
+                  f'  - name: {q(ORG_NAME)}',
+              ]
+
+              if paper:
+                  lines.append('preferred-citation:')
+                  lines.append('  type: article')
+                  if paper.get('title'):
+                      lines.append(f'  title: {q(paper["title"])}')
+                  if paper.get('authors'):
+                      lines.append('  authors:')
+                      for a in paper['authors']:
+                          if 'family-names' in a and 'given-names' in a:
+                              lines.append(f'  - family-names: {q(a["family-names"])}')
+                              lines.append(f'    given-names: {q(a["given-names"])}')
+                          elif 'name' in a:
+                              lines.append(f'  - name: {q(a["name"])}')
+                  if paper.get('doi'):
+                      lines.append(f'  doi: {q(paper["doi"])}')
+                  if paper.get('url'):
+                      lines.append(f'  url: {q(paper["url"])}')
+                  if paper.get('year'):
+                      lines.append(f'  year: {paper["year"]}')
+                  if paper.get('journal'):
+                      lines.append(f'  journal: {q(paper["journal"])}')
+
+              return '\n'.join(lines) + '\n', branch
+
+          # ──────────────────────────────────────────────
+          # GitHub API: create file
+          # ──────────────────────────────────────────────
+
+          def create_citation(full_name, content, branch):
+              encoded = base64.b64encode(content.encode()).decode()
+              resp = requests.put(
+                  f'https://api.github.com/repos/{full_name}/contents/CITATION.cff',
+                  headers=HEADERS,
+                  json={
+                      'message': 'chore: add CITATION.cff [automated]',
+                      'content': encoded,
+                      'branch':  branch,
+                  },
+              )
+              return resp.status_code in (200, 201), resp.json()
+
+          # ──────────────────────────────────────────────
+          # Main loop
+          # ──────────────────────────────────────────────
+
+          print(f'Fetching repositories for: {ORG_NAME}')
+          repos = get_all_repos()
+          print(f'Total repositories found: {len(repos)}')
+          print('=' * 60)
+
+          created_count  = 0
+          skipped_count  = 0
+          failed_count   = 0
+
+          for repo in repos:
+              full_name = repo['full_name']
+              print(f'\n[{full_name}]')
+
+              if repo.get('archived'):
+                  print('  Archived repo — skipping.')
+                  skipped_count += 1
+                  continue
+
+              if citation_exists(full_name):
+                  print('  CITATION.cff already exists — skipping.')
+                  skipped_count += 1
+                  continue
+
+              print('  CITATION.cff not found — fetching README...')
+              readme = get_readme(full_name)
+
+              paper = None
+              if readme:
+                  arxiv_ids, dois = find_paper_links(readme)
+                  if arxiv_ids:
+                      print(f'  Found arXiv ID: {arxiv_ids[0]}')
+                      paper = fetch_arxiv(arxiv_ids[0])
+                  elif dois:
+                      print(f'  Found DOI: {dois[0]}')
+                      paper = fetch_doi(dois[0])
+
+              if paper and paper.get('title'):
+                  print(f'  Paper title: {paper["title"]}')
+              else:
+                  print('  No paper link found in README — using repository defaults.')
+
+              cff_content, branch = build_cff(repo, paper)
+              ok, result = create_citation(full_name, cff_content, branch)
+
+              if ok:
+                  print('  Successfully created CITATION.cff.')
+                  created_count += 1
+              else:
+                  msg = result.get('message', str(result))
+                  print(f'  Failed to create CITATION.cff: {msg}')
+                  failed_count += 1
+
+              time.sleep(0.5)  # gentle rate-limit buffer
+
+          print('\n' + '=' * 60)
+          print(f'Done. Created: {created_count}  |  Skipped: {skipped_count}  |  Failed: {failed_count}')
+          PYTHON_EOF
