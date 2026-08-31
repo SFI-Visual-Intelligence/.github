@@ -28,6 +28,10 @@
 [Visual Intelligence](https://www.visual-intelligence.no/) is in ongoing collaboration with [The Alan Turing Institute](https://www.turing.ac.uk/), the [British Antarctic Survey](https://www.bas.ac.uk/), and the [University of Cambridge](https://www.cam.ac.uk/) on AI powered sea ice forcasting. 
 Detailed information on the project as well as links to corresponding GitHub repositories can be found on the [IceNet website](https://icenet.ai/).
 
+### BCRBench 🎗️
+
+[BCRBench](https://github.com/SFI-Visual-Intelligence/BCRBench) is an open-source benchmark for breast cancer risk prediction from mammography. It provides a unified, reproducible framework for training and evaluating state-of-the-art deep learning models using standardized preprocessing, inference, and evaluation protocols. The project invites research communities to contribute their own models through a common interface, helping to advance AI-based mammography risk prediction in a transparent and comparable manner. Detailed information on how to contribute can be found on the BCRBench [documentation](https://sot176.github.io/BCRBench/).
+
 ### Get in touch 🗣️
 If you have questions or remarks to any of the Visual Intelligence repositories, or if you are interested in a collaboration, please open a [Discussion](https://github.com/orgs/SFI-Visual-Intelligence/discussions).
 
