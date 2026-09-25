@@ -58,7 +58,7 @@ Papers can appear in both views to make the index useful from either direction.
 | Year | Topic | Research challenge | Publication | Code / resource |
 | --- | --- | --- | --- | --- |
 | 2026 | Mammography | Context and dependencies | Longitudinal Multi-View Modeling for Breast Cancer Risk Prediction ([paper](https://arxiv.org/abs/2607.11343)) | [Code](https://github.com/SFI-Visual-Intelligence/LMV-Net)  |
-| 2026 | Mammography | Explainability and reliability | Beyond Clean Test Sets: Spurious Correlations in Medical Vision-Language Models and the Role of Concept Supervision ([paper]([https://arxiv.org/abs/2607.11343](https://papers.miccai.org/miccai-2026/paper/5420_paper.pdf))) | [Code](https://github.com/SFI-Visual-Intelligence/framework_for_vlm_eval)  |
+| 2026 | Mammography | Explainability and reliability | Beyond Clean Test Sets: Spurious Correlations in Medical Vision-Language Models and the Role of Concept Supervision ([paper](https://papers.miccai.org/miccai-2026/paper/5420_paper.pdf)) | [Code](https://github.com/SFI-Visual-Intelligence/framework_for_vlm_eval)  |
 | 2026 | Dynamic PET | Limited training data | A robust and versatile deep learning model for prediction of the arterial input function in dynamic small animal [18F] FDG PET imaging ([paper](https://link.springer.com/article/10.1186/s13550-026-01398-9)) |   |
 | 2026 | General | Limited training data | Comparing Foundation Models for Medical Images: A Study on Limited Data and Generalization ([paper](https://proceedings.mlr.press/v307/utseth26a.html)) |   |
 | 2026 | Cardiac | Context and dependencies | Spatio-Temporal Landmark Detection via Selective Fine-Tuning of Echocardiography Foundation Models ([paper](https://openreview.net/forum?id=91igqpzV9M&noteId=91igqpzV9M)) | [Code](https://github.com/SFI-Visual-Intelligence/EchoVLMLandmarks) |
@@ -267,7 +267,8 @@ Papers can appear in both views to make the index useful from either direction.
 
 | Year | Topic | Innovation area | Publication | Code / resource |
 | --- | --- | --- | --- | --- |
-| 2026 | Explainability and reliability | Medicine and health | Beyond Clean Test Sets: Spurious Correlations in Medical Vision-Language Models and the Role of Concept Supervision ([paper]([https://arxiv.org/abs/2607.11343](https://papers.miccai.org/miccai-2026/paper/5420_paper.pdf))) | [Code](https://github.com/SFI-Visual-Intelligence/framework_for_vlm_eval)  |
+| 2026 | Explainability and reliability | Medicine and health | Beyond Clean Test Sets: Spurious Correlations in Medical Vision-Language Models and the Role of Concept Supervision ([paper]([https://papers.miccai.org/miccai-2026/paper/5420_paper.pdf](https://papers.miccai.org/miccai-2026/paper/5420_paper.pdf))) | [Code](https://github.com/SFI-Visual-Intelligence/framework_for_vlm_eval)  |
+| 2026 | Explainability and reliability |  | ProtoX-AD: Self-Explainable Time Series Anomaly Detection and Characterization ([paper]([https://arxiv.org/abs/2606.13277](https://arxiv.org/abs/2606.13277))) | [Code](https://github.com/SFI-Visual-Intelligence/ProtoX-AD)  |
 | 2026 | Concepts and prototypes |   | Concepts' Information Bottleneck Models ([paper](https://openreview.net/forum?id=JGIYfwaNpT)) |   |
 | 2026 | Concepts and prototypes |   | Why Prototypes Collapse: Diagnosing and Preventing Partial Collapse in Prototypical Self-Supervised Learning ([paper](https://openreview.net/forum?id=fVJEWdwvLO)) |   |
 | 2025 | General | Medicine and health | A lightweight and extensible cell segmentation and classification model for H&E-stained cancer whole slide images ([paper](https://doi.org/10.1016/j.compbiomed.2025.111326)) |   |
