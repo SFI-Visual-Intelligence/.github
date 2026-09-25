@@ -267,8 +267,8 @@ Papers can appear in both views to make the index useful from either direction.
 
 | Year | Topic | Innovation area | Publication | Code / resource |
 | --- | --- | --- | --- | --- |
-| 2026 | Explainability and reliability | Medicine and health | Beyond Clean Test Sets: Spurious Correlations in Medical Vision-Language Models and the Role of Concept Supervision ([paper]([https://papers.miccai.org/miccai-2026/paper/5420_paper.pdf](https://papers.miccai.org/miccai-2026/paper/5420_paper.pdf))) | [Code](https://github.com/SFI-Visual-Intelligence/framework_for_vlm_eval)  |
-| 2026 | Explainability and reliability |  | ProtoX-AD: Self-Explainable Time Series Anomaly Detection and Characterization ([paper]([https://arxiv.org/abs/2606.13277](https://arxiv.org/abs/2606.13277))) | [Code](https://github.com/SFI-Visual-Intelligence/ProtoX-AD)  |
+| 2026 | Concepts and prototypes | Medicine and health | Beyond Clean Test Sets: Spurious Correlations in Medical Vision-Language Models and the Role of Concept Supervision ([paper]([https://papers.miccai.org/miccai-2026/paper/5420_paper.pdf](https://papers.miccai.org/miccai-2026/paper/5420_paper.pdf))) | [Code](https://github.com/SFI-Visual-Intelligence/framework_for_vlm_eval)  |
+| 2026 | Concepts and prototypes |  | ProtoX-AD: Self-Explainable Time Series Anomaly Detection and Characterization ([paper]([https://arxiv.org/abs/2606.13277](https://arxiv.org/abs/2606.13277))) | [Code](https://github.com/SFI-Visual-Intelligence/ProtoX-AD)  |
 | 2026 | Concepts and prototypes |   | Concepts' Information Bottleneck Models ([paper](https://openreview.net/forum?id=JGIYfwaNpT)) |   |
 | 2026 | Concepts and prototypes |   | Why Prototypes Collapse: Diagnosing and Preventing Partial Collapse in Prototypical Self-Supervised Learning ([paper](https://openreview.net/forum?id=fVJEWdwvLO)) |   |
 | 2025 | General | Medicine and health | A lightweight and extensible cell segmentation and classification model for H&E-stained cancer whole slide images ([paper](https://doi.org/10.1016/j.compbiomed.2025.111326)) |   |
