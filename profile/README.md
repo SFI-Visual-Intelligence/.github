@@ -267,6 +267,7 @@ Papers can appear in both views to make the index useful from either direction.
 
 | Year | Topic | Innovation area | Publication | Code / resource |
 | --- | --- | --- | --- | --- |
+| 2026 | Mammography | Explainability and reliability | Beyond Clean Test Sets: Spurious Correlations in Medical Vision-Language Models and the Role of Concept Supervision ([paper]([https://arxiv.org/abs/2607.11343](https://papers.miccai.org/miccai-2026/paper/5420_paper.pdf))) | [Code](https://github.com/SFI-Visual-Intelligence/framework_for_vlm_eval)  |
 | 2026 | Concepts and prototypes |   | Concepts' Information Bottleneck Models ([paper](https://openreview.net/forum?id=JGIYfwaNpT)) |   |
 | 2026 | Concepts and prototypes |   | Why Prototypes Collapse: Diagnosing and Preventing Partial Collapse in Prototypical Self-Supervised Learning ([paper](https://openreview.net/forum?id=fVJEWdwvLO)) |   |
 | 2025 | General | Medicine and health | A lightweight and extensible cell segmentation and classification model for H&E-stained cancer whole slide images ([paper](https://doi.org/10.1016/j.compbiomed.2025.111326)) |   |
